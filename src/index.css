@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ================= GLOBAL FONT ================= */
+* {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* ================= HEADINGS ================= */
+h1 {
+  font-weight: 700; /* Bold */
+}
+
+h2 {
+  font-weight: 600; /* Semi-bold */
+}
+
+h3 {
+  font-weight: 600;
+}
+
+h4, h5, h6 {
+  font-weight: 500;
+}
+
+/* ================= BODY TEXT ================= */
+p, span, li, a {
+  font-weight: 400; /* Regular */
+}
+
+/* ================= NAVBAR & BUTTONS ================= */
+button, nav, .nav-link {
+  font-weight: 500; /* Medium */
+}
+
+/* ================= SMALL / MUTED TEXT ================= */
+.small-text, footer p {
+  font-weight: 300; /* Light */
+}
