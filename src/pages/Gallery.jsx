@@ -19,7 +19,7 @@ export default function Gallery() {
     const { data } = await supabase
       .from("gallery")
       .select("*")
-      .order("created_at", { ascending: false });
+      .order("position", { ascending: true });
 
     setImages(data || []);
     setLoading(false);

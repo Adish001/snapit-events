@@ -24,7 +24,7 @@ export default function ImageUpload({ onUpload }) {
 
     const fileName = `${Date.now()}-${file.name}`;
 
-    // Upload to storage
+    /* 1️⃣ Upload to storage */
     const { error: uploadError } = await supabase.storage
       .from("gallery")
       .upload(fileName, file);
@@ -35,24 +35,41 @@ export default function ImageUpload({ onUpload }) {
       return;
     }
 
-    // Get public URL
-    const { data } = supabase.storage
+    /* 2️⃣ Get public URL */
+    const { data: publicData } = supabase.storage
       .from("gallery")
       .getPublicUrl(fileName);
 
-    // Save to database
-    await supabase.from("gallery").insert({
-      image_url: data.publicUrl,
+    /* 3️⃣ Get last position SAFELY */
+    const { data: lastImage } = await supabase
+      .from("gallery")
+      .select("position")
+      .order("position", { ascending: false })
+      .limit(1);
+
+    const newPosition =
+      lastImage && lastImage.length > 0
+        ? lastImage[0].position + 1
+        : 1;
+
+    /* 4️⃣ Insert into DB */
+    const { error } = await supabase.from("gallery").insert({
+      image_url: publicData.publicUrl,
       category,
       sub_category: category === "lighting" ? subCategory : null,
+      position: newPosition,
     });
 
-    setFile(null);
-    setCategory("");
-    setSubCategory("");
-    setLoading(false);
+    if (error) {
+      alert(error.message);
+    } else {
+      onUpload();
+      setFile(null);
+      setCategory("");
+      setSubCategory("");
+    }
 
-    onUpload(); // refresh gallery
+    setLoading(false);
   };
 
   return (
@@ -67,7 +84,6 @@ export default function ImageUpload({ onUpload }) {
         required
       />
 
-      {/* CATEGORY */}
       <select
         value={category}
         onChange={(e) => {
@@ -85,7 +101,6 @@ export default function ImageUpload({ onUpload }) {
         <option value="corporate">Corporate</option>
       </select>
 
-      {/* LIGHTING SUB-CATEGORY */}
       {category === "lighting" && (
         <select
           value={subCategory}
@@ -101,7 +116,7 @@ export default function ImageUpload({ onUpload }) {
 
       <button
         disabled={loading}
-        className="bg-black text-white px-4 py-2 rounded"
+        className="bg-black text-white px-4 py-2 rounded w-full"
       >
         {loading ? "Uploading..." : "Upload Image"}
       </button>
