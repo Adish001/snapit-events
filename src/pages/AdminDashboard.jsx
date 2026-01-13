@@ -4,10 +4,7 @@ import { supabase } from "../supabase";
 import useAdmin from "../hooks/useAdmin";
 import ImageUpload from "../components/ImageUpload";
 
-import {
-  DndContext,
-  closestCenter,
-} from "@dnd-kit/core";
+import { DndContext, closestCenter } from "@dnd-kit/core";
 import {
   SortableContext,
   useSortable,
@@ -16,6 +13,7 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
+/* ================= SORTABLE IMAGE CARD ================= */
 function SortableImage({ img, onDelete }) {
   const {
     attributes,
@@ -34,10 +32,17 @@ function SortableImage({ img, onDelete }) {
     <div
       ref={setNodeRef}
       style={style}
-      {...attributes}
-      {...listeners}
-      className="border rounded shadow bg-white cursor-grab active:cursor-grabbing"
+      className="border rounded shadow bg-white"
     >
+      {/* DRAG HANDLE */}
+      <div
+        {...attributes}
+        {...listeners}
+        className="cursor-grab active:cursor-grabbing bg-gray-100 text-center text-xs py-1"
+      >
+        ⠿ Drag
+      </div>
+
       <img
         src={img.image_url}
         alt=""
@@ -46,6 +51,7 @@ function SortableImage({ img, onDelete }) {
 
       <div className="p-2 text-xs space-y-1">
         <p><b>Category:</b> {img.category}</p>
+
         {img.sub_category && (
           <p><b>Lighting:</b> {img.sub_category}</p>
         )}
@@ -61,18 +67,20 @@ function SortableImage({ img, onDelete }) {
   );
 }
 
+/* ================= ADMIN DASHBOARD ================= */
 export default function AdminDashboard() {
   const { user, loading } = useAdmin();
   const navigate = useNavigate();
-
   const [images, setImages] = useState([]);
 
+  /* 🔐 AUTH CHECK */
   useEffect(() => {
     if (!loading && !user) {
       navigate("/admin-login", { replace: true });
     }
   }, [loading, user, navigate]);
 
+  /* 📸 FETCH IMAGES */
   const fetchImages = async () => {
     const { data } = await supabase
       .from("gallery")
@@ -86,6 +94,7 @@ export default function AdminDashboard() {
     if (user) fetchImages();
   }, [user]);
 
+  /* 🗑 DELETE IMAGE */
   const deleteImage = async (img) => {
     if (!window.confirm("Delete this image?")) return;
 
@@ -96,7 +105,7 @@ export default function AdminDashboard() {
     fetchImages();
   };
 
-  /* 🔥 DRAG END HANDLER */
+  /* 🔥 DRAG & DROP HANDLER */
   const handleDragEnd = async (event) => {
     const { active, over } = event;
     if (!over || active.id === over.id) return;
@@ -107,7 +116,7 @@ export default function AdminDashboard() {
     const newOrder = arrayMove(images, oldIndex, newIndex);
     setImages(newOrder);
 
-    // 🔐 Save positions to DB
+    // Save updated positions
     for (let i = 0; i < newOrder.length; i++) {
       await supabase
         .from("gallery")
@@ -123,7 +132,7 @@ export default function AdminDashboard() {
     <div className="max-w-7xl mx-auto p-6">
       <h1 className="text-3xl font-bold mb-2">Admin Dashboard</h1>
       <p className="text-gray-600 mb-6">
-        Drag & drop images to reorder gallery
+        Drag images using the handle to reorder gallery
       </p>
 
       <ImageUpload onUpload={fetchImages} />
