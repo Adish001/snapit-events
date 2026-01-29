@@ -1,36 +1,11 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaWhatsapp, FaInstagram, FaPhoneAlt } from "react-icons/fa";
-import { Helmet } from "react-helmet-async";
 import AnimatedPage from "../components/AnimatedPage";
-import { useEffect } from "react";
-import { setSEO } from "../utils/seo";
-useEffect(() => {
-  setSEO({
-    title: "SnapIt Events | Wedding & Event Management in India",
-    description:
-      "SnapIt Events offers premium wedding planning, sangeet decor, reception lighting, and corporate event management. Snap • Celebrate • Repeat.",
-    canonical: "https://snapitevents.in/",
-  });
-}, []);
 
 export default function Home() {
   return (
     <AnimatedPage>
-      {/* ================= SEO ================= */}
-      <Helmet>
-        <title>SnapIt Events | Wedding & Event Management in India</title>
-        <meta
-          name="description"
-          content="SnapIt Events offers premium wedding planning, sangeet decor, reception lighting, and corporate event management. Snap • Celebrate • Repeat."
-        />
-        <meta
-          name="keywords"
-          content="SnapIt Events, wedding planners, sangeet decor, event lighting, corporate events"
-        />
-        <link rel="canonical" href="https://snapitevents.in/" />
-      </Helmet>
-
       {/* ================= HERO SECTION ================= */}
       <section className="relative min-h-[90vh] flex items-center justify-center text-center px-6">
         <div
