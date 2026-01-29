@@ -2,6 +2,14 @@ import { useEffect, useState } from "react";
 import { supabase } from "../supabase";
 import PageWrapper from "../components/PageWrapper";
 import Section from "../components/Section";
+useEffect(() => {
+  setSEO({
+    title: "Gallery | SnapIt Events",
+    description:
+      "Explore our wedding, sangeet, reception and lighting event gallery by SnapIt Events.",
+    canonical: "https://snapitevents.in/gallery",
+  });
+}, []);
 
 export default function Gallery() {
   const [images, setImages] = useState([]);

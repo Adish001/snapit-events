@@ -5,6 +5,14 @@ import AnimatedPage from "../components/AnimatedPage";
 import PageWrapper from "../components/PageWrapper";
 import Section from "../components/Section";
 import { FaWhatsapp, FaInstagram, FaPhoneAlt } from "react-icons/fa";
+useEffect(() => {
+  setSEO({
+    title: "Contact SnapIt Events | Event Management",
+    description:
+      "Contact SnapIt Events for weddings, lighting and corporate event planning.",
+    canonical: "https://snapitevents.in/contact",
+  });
+}, []);
 
 export default function Contact() {
   const [form, setForm] = useState({

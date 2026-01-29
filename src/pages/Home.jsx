@@ -1,26 +1,44 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaWhatsapp, FaInstagram, FaPhoneAlt } from "react-icons/fa";
+import { Helmet } from "react-helmet-async";
 import AnimatedPage from "../components/AnimatedPage";
+import { useEffect } from "react";
+import { setSEO } from "../utils/seo";
+useEffect(() => {
+  setSEO({
+    title: "SnapIt Events | Wedding & Event Management in India",
+    description:
+      "SnapIt Events offers premium wedding planning, sangeet decor, reception lighting, and corporate event management. Snap • Celebrate • Repeat.",
+    canonical: "https://snapitevents.in/",
+  });
+}, []);
 
 export default function Home() {
   return (
     <AnimatedPage>
+      {/* ================= SEO ================= */}
+      <Helmet>
+        <title>SnapIt Events | Wedding & Event Management in India</title>
+        <meta
+          name="description"
+          content="SnapIt Events offers premium wedding planning, sangeet decor, reception lighting, and corporate event management. Snap • Celebrate • Repeat."
+        />
+        <meta
+          name="keywords"
+          content="SnapIt Events, wedding planners, sangeet decor, event lighting, corporate events"
+        />
+        <link rel="canonical" href="https://snapitevents.in/" />
+      </Helmet>
+
       {/* ================= HERO SECTION ================= */}
       <section className="relative min-h-[90vh] flex items-center justify-center text-center px-6">
-
-        {/* Background Image */}
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: "url('/hero-bg.png')",
-          }}
+          style={{ backgroundImage: "url('/hero-bg.png')" }}
         />
-
-        {/* Black Translucent Overlay */}
         <div className="absolute inset-0 bg-black/75" />
 
-        {/* Content */}
         <div className="relative z-10 max-w-4xl">
           <motion.h1
             initial={{ opacity: 0, y: -40 }}
@@ -37,11 +55,10 @@ export default function Home() {
             transition={{ delay: 0.3, duration: 0.8 }}
             className="text-lg md:text-xl mb-8 text-gray-200"
           >
-            Creating unforgettable moments for weddings, birthdays and
-            corporate events
+            Snap • Celebrate • Repeat — Creating unforgettable moments for
+            weddings, birthdays & corporate events
           </motion.p>
 
-          {/* CTA Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -63,7 +80,6 @@ export default function Home() {
             </Link>
           </motion.div>
 
-          {/* ICON ROW */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -73,6 +89,7 @@ export default function Home() {
             <a
               href="https://wa.me/918453846060"
               target="_blank"
+              rel="noopener noreferrer"
               className="text-green-500 hover:scale-110 transition"
             >
               <FaWhatsapp />
@@ -86,8 +103,9 @@ export default function Home() {
             </a>
 
             <a
-              href="https://www.instagram.com/snapit_events?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+              href="https://www.instagram.com/snapit_events"
               target="_blank"
+              rel="noopener noreferrer"
               className="text-pink-400 hover:scale-110 transition"
             >
               <FaInstagram />
@@ -96,7 +114,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ================= SERVICES SECTION ================= */}
+      {/* ================= SERVICES ================= */}
       <section className="max-w-6xl mx-auto py-20 px-6">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -111,15 +129,15 @@ export default function Home() {
         <div className="grid md:grid-cols-3 gap-8">
           <ServiceCard
             title="Weddings"
-            desc="Elegant wedding décor, premium lighting and flawless execution."
+            desc="Luxury wedding décor, premium lighting & flawless execution."
           />
           <ServiceCard
             title="Birthdays"
-            desc="Creative birthday setups with vibrant themes and lighting."
+            desc="Creative birthday themes with vibrant lighting setups."
           />
           <ServiceCard
             title="Corporate Events"
-            desc="Professional truss, line array systems and stage production."
+            desc="Professional truss, line array systems & stage production."
           />
         </div>
       </section>
@@ -127,7 +145,6 @@ export default function Home() {
   );
 }
 
-/* ================= SERVICE CARD ================= */
 function ServiceCard({ title, desc }) {
   return (
     <motion.div
