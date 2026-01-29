@@ -8,12 +8,16 @@ export default function Home() {
     <AnimatedPage>
       {/* ================= HERO SECTION ================= */}
       <section className="relative min-h-[90vh] flex items-center justify-center text-center px-6">
+        {/* Background Image */}
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: "url('/hero-bg.png')" }}
         />
+
+        {/* Black Overlay */}
         <div className="absolute inset-0 bg-black/75" />
 
+        {/* Content */}
         <div className="relative z-10 max-w-4xl">
           <motion.h1
             initial={{ opacity: 0, y: -40 }}
@@ -34,6 +38,7 @@ export default function Home() {
             weddings, birthdays & corporate events
           </motion.p>
 
+          {/* CTA Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -55,6 +60,7 @@ export default function Home() {
             </Link>
           </motion.div>
 
+          {/* Social Icons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
