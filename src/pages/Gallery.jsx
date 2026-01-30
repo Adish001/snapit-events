@@ -2,14 +2,6 @@ import { useEffect, useState } from "react";
 import { supabase } from "../supabase";
 import PageWrapper from "../components/PageWrapper";
 import Section from "../components/Section";
-useEffect(() => {
-  setSEO({
-    title: "Gallery | SnapIt Events",
-    description:
-      "Explore our wedding, sangeet, reception and lighting event gallery by SnapIt Events.",
-    canonical: "https://snapitevents.in/gallery",
-  });
-}, []);
 
 export default function Gallery() {
   const [images, setImages] = useState([]);
@@ -33,7 +25,6 @@ export default function Gallery() {
     setLoading(false);
   };
 
-  /* ================= FILTER LOGIC ================= */
   const filteredImages = images.filter((img) => {
     if (activeCategory === "all") return true;
 
@@ -128,7 +119,6 @@ export default function Gallery() {
                         className="h-56 w-full object-cover group-hover:scale-110 transition duration-300"
                       />
 
-                      {/* HOVER OVERLAY */}
                       <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
                         <span className="text-white text-sm tracking-wide">
                           View
@@ -136,7 +126,6 @@ export default function Gallery() {
                       </div>
                     </div>
 
-                    {/* BADGE */}
                     <div className="mt-2 text-xs text-gray-400 text-center">
                       {img.category}
                       {img.sub_category && ` • ${img.sub_category}`}

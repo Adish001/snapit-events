@@ -5,14 +5,6 @@ import AnimatedPage from "../components/AnimatedPage";
 import PageWrapper from "../components/PageWrapper";
 import Section from "../components/Section";
 import { FaWhatsapp, FaInstagram, FaPhoneAlt } from "react-icons/fa";
-useEffect(() => {
-  setSEO({
-    title: "Contact SnapIt Events | Event Management",
-    description:
-      "Contact SnapIt Events for weddings, lighting and corporate event planning.",
-    canonical: "https://snapitevents.in/contact",
-  });
-}, []);
 
 export default function Contact() {
   const [form, setForm] = useState({
@@ -34,7 +26,7 @@ export default function Contact() {
     setLoading(true);
     setStatus("");
 
-    /* 1️⃣ SAVE TO SUPABASE */
+    // 1️⃣ Save to Supabase
     const { error } = await supabase.from("contact_messages").insert({
       name: form.name,
       email: form.email,
@@ -43,23 +35,23 @@ export default function Contact() {
     });
 
     if (error) {
-      setStatus("Failed to save message.");
+      setStatus("Failed to send message.");
       setLoading(false);
       return;
     }
 
-    /* 2️⃣ SEND EMAIL (ADMIN + AUTO-REPLY) */
+    // 2️⃣ Send Email (EmailJS)
     emailjs
       .send(
-        "service_ma9zui2",      // your service ID
-        "template_hvvwgpo",     // your template ID
+        "service_ma9zui2",
+        "template_hvvwgpo",
         {
           name: form.name,
           email: form.email,
           phone: form.phone,
           message: form.message,
         },
-        "IUYytXT3UCNt7pluq"     // your public key
+        "IUYytXT3UCNt7pluq"
       )
       .then(() => {
         setStatus("Message sent successfully! ✅");
@@ -85,12 +77,11 @@ export default function Contact() {
           subtitle="Let’s create something unforgettable"
         >
           <div className="grid md:grid-cols-2 gap-10 items-start">
-            
             {/* CONTACT INFO */}
             <div className="space-y-6 text-gray-300">
               <p>
-                We’d love to be part of your celebration.  
-                Reach out to us via phone, WhatsApp, Instagram,  
+                We’d love to be part of your celebration.
+                Reach out to us via phone, WhatsApp, Instagram,
                 or simply drop a message here.
               </p>
 
