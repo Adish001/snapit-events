@@ -6,13 +6,21 @@ import AnimatedPage from "../components/AnimatedPage";
 export default function Home() {
   return (
     <AnimatedPage>
+      {/* ================= HERO SECTION ================= */}
       <section className="relative min-h-[90vh] flex items-center justify-center text-center px-6">
+
+        {/* Background Image */}
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url('/hero-bg.png')" }}
+          style={{
+            backgroundImage: "url('/hero-bg.png')",
+          }}
         />
+
+        {/* Black Translucent Overlay */}
         <div className="absolute inset-0 bg-black/75" />
 
+        {/* Content */}
         <div className="relative z-10 max-w-4xl">
           <motion.h1
             initial={{ opacity: 0, y: -40 }}
@@ -29,10 +37,11 @@ export default function Home() {
             transition={{ delay: 0.3, duration: 0.8 }}
             className="text-lg md:text-xl mb-8 text-gray-200"
           >
-            Snap • Celebrate • Repeat — Creating unforgettable moments for
-            weddings, birthdays & corporate events
+            Creating unforgettable moments for weddings, birthdays and
+            corporate events
           </motion.p>
 
+          {/* CTA Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -54,6 +63,7 @@ export default function Home() {
             </Link>
           </motion.div>
 
+          {/* ICON ROW */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -63,7 +73,6 @@ export default function Home() {
             <a
               href="https://wa.me/918453846060"
               target="_blank"
-              rel="noopener noreferrer"
               className="text-green-500 hover:scale-110 transition"
             >
               <FaWhatsapp />
@@ -77,9 +86,8 @@ export default function Home() {
             </a>
 
             <a
-              href="https://www.instagram.com/snapit_events"
+              href="https://www.instagram.com/snapit_events?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
               target="_blank"
-              rel="noopener noreferrer"
               className="text-pink-400 hover:scale-110 transition"
             >
               <FaInstagram />
@@ -88,6 +96,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ================= SERVICES SECTION ================= */}
       <section className="max-w-6xl mx-auto py-20 px-6">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -102,15 +111,15 @@ export default function Home() {
         <div className="grid md:grid-cols-3 gap-8">
           <ServiceCard
             title="Weddings"
-            desc="Luxury wedding décor, premium lighting & flawless execution."
+            desc="Elegant wedding décor, premium lighting and flawless execution."
           />
           <ServiceCard
             title="Birthdays"
-            desc="Creative birthday themes with vibrant lighting setups."
+            desc="Creative birthday setups with vibrant themes and lighting."
           />
           <ServiceCard
             title="Corporate Events"
-            desc="Professional truss, line array systems & stage production."
+            desc="Professional truss, line array systems and stage production."
           />
         </div>
       </section>
@@ -118,6 +127,7 @@ export default function Home() {
   );
 }
 
+/* ================= SERVICE CARD ================= */
 function ServiceCard({ title, desc }) {
   return (
     <motion.div
@@ -131,4 +141,4 @@ function ServiceCard({ title, desc }) {
       <p className="text-muted">{desc}</p>
     </motion.div>
   );
-}
+}  
